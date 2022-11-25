@@ -1,0 +1,13 @@
+echo '# Time (fs)   Electron energy'  > el_en_vs_t.dat
+for f in fort.[123]???
+do
+echo $f
+t=`echo $f | cut -d"." -f2`
+t=`bc -l << !
+$t
+!`
+cp -f $f dist_in.dat
+./a.out
+en=`cat toten.dat`
+echo $t $en >> el_en_vs_t.dat
+done
