@@ -1,0 +1,13 @@
+echo '# Time (fs)   LA Phonon energy'  > ph_la_en_vs_t.dat
+for f in fort.[1][012345]??
+do
+echo $f
+t=`echo $f | cut -d"." -f2`
+t=`bc -l << !
+$t - 999
+!`
+cp -f $f dist_in.dat
+./a.out
+en=`cat toten.dat`
+echo $t $en >> ph_la_en_vs_t.dat
+done
